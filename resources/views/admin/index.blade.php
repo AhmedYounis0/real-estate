@@ -9,14 +9,14 @@
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-primary">
-                        <i class="far fa-user"></i>
+                        <i class="fas fa-hand-point-right"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total News Categories</h4>
+                            <h4>Total Locations</h4>
                         </div>
                         <div class="card-body">
-                            12
+                            {{ $totalLocations }}
                         </div>
                     </div>
                 </div>
@@ -24,14 +24,14 @@
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-danger">
-                        <i class="fas fa-book-open"></i>
+                        <i class="fas fa-hand-point-right"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total News</h4>
+                            <h4>Total Types</h4>
                         </div>
                         <div class="card-body">
-                            122
+                            {{ $totalTypes }}
                         </div>
                     </div>
                 </div>
@@ -39,14 +39,104 @@
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-warning">
-                        <i class="fas fa-bullhorn"></i>
+                        <i class="fas fa-hand-point-right"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total Users</h4>
+                            <h4>Total Amenities</h4>
                         </div>
                         <div class="card-body">
-                            45
+                            {{ $totalAmenities }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-danger">
+                        <i class="fas fa-hand-point-right"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Properties</h4>
+                        </div>
+                        <div class="card-body">
+                            {{ $totalProperties }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-primary">
+                        <i class="fas fa-hand-point-right"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Orders</h4>
+                        </div>
+                        <div class="card-body">
+                            {{ $totalOrders }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-danger">
+                        <i class="fas fa-hand-point-right"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Subscribers</h4>
+                        </div>
+                        <div class="card-body">
+                            {{ $totalSubscribers }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-warning">
+                        <i class="fas fa-hand-point-right"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Posts</h4>
+                        </div>
+                        <div class="card-body">
+                            {{ $totalPosts }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-danger">
+                        <i class="fas fa-hand-point-right"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Customers</h4>
+                        </div>
+                        <div class="card-body">
+                            {{ $totalCustomers }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-primary">
+                        <i class="fas fa-hand-point-right"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Agents</h4>
+                        </div>
+                        <div class="card-body">
+                            {{ $totalAgents }}
                         </div>
                     </div>
                 </div>

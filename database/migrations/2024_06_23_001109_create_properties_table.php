@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->integer('built_year')->nullable();
             $table->text('location_map')->nullable();
-            $table->boolean('is_featured')->default(false);
+            $table->enum('is_featured', ['1', '0'])->nullable();
             $table->timestamps();
         });
     }

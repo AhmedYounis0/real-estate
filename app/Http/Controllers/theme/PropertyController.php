@@ -55,7 +55,7 @@ class PropertyController extends Controller
     public function show(Property $property)
     {
         $title = 'Property Details';
-        $property->load(['location','type','amenities']);
+        $property->load(['location','type','amenities','images','videos']);
         $relatedProperties = Property::with(['location','type'])
             ->whereNotNull('order_id')
             ->where('id','!=',$property->id)

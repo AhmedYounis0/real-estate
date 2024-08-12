@@ -1,4 +1,4 @@
-<div class="page-top" style="background-image: url('uploads/banner.jpg')">
+<div class="page-top" style="background-image: url({{ '/storage/settings/'.$siteSettings['internal_banner']['image'] }})">
     <div class="bg"></div>
     <div class="container">
         <div class="row">

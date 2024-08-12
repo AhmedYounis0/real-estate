@@ -4,12 +4,12 @@
             <li class="list-group-item @if($title == 'Dashboard') active @endif">
                 <a href="{{ route('user.dashboard') }}">Dashboard</a>
             </li>
-            <li class="list-group-item">
-                <a href="user-wishlist.html">Wishlist</a>
+            <li class="list-group-item @if($title == 'Wishlist') active @endif">
+                <a href="{{ route('user.wishlist.index') }}">Wishlist</a>
             </li>
-            <li class="list-group-item">
-                <a href="user-payment.html">Messages</a>
-            </li>
+{{--            <li class="list-group-item">--}}
+{{--                <a href="user-payment.html">Messages</a>--}}
+{{--            </li>--}}
             <li class="list-group-item @if($title == 'Edit Profile') active @endif">
                 <a href="{{ route('user.profile') }}">Edit Profile</a>
             </li>

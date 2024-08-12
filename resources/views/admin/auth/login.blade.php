@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div>
-                                            <a href="forget-password.html">
+                                            <a href="{{ route('dashboard.password.request') }}">
                                                 Forget Password?
                                             </a>
                                         </div>

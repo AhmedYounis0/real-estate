@@ -1,7 +1,5 @@
 @extends('theme.master')
-@section('banner_title','Dashboard')
 @section('content')
-
 @include('theme.partials.internal-banner')
 
 <div class="page-content user-panel">
@@ -13,16 +11,16 @@
                 <div class="row box-items">
                     <div class="col-md-4">
                         <div class="box1">
-                            <h4>12</h4>
+                            <h4>{{ $wishlistCount }}</h4>
                             <p>Wishlist Properties</p>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="box2">
-                            <h4>3</h4>
-                            <p>Messages</p>
-                        </div>
-                    </div>
+{{--                    <div class="col-md-4">--}}
+{{--                        <div class="box2">--}}
+{{--                            <h4>3</h4>--}}
+{{--                            <p>Messages</p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>

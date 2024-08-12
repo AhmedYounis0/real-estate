@@ -18,8 +18,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('queue:work')->everyMinute();
         $schedule->command('package:expire')->everySecond();
+        $schedule->command('queue:work')->everyMinute();
     }
 
     /**

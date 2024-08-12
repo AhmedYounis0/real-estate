@@ -1,6 +1,6 @@
 @extends('theme.master')
 @section('content')
-<div class="slider" style="background-image: url(uploads/banner-home.jpg)">
+<div class="slider" style="background-image: url({{ '/storage/settings/'.$siteSettings['banner_home']['image'] }})">
     <div class="bg"></div>
     <div class="container">
         <div class="row">
@@ -81,6 +81,8 @@
                                 <div class="top">
                                     <div class="status-sale">
                                         {{ $property->purpose }}
+
+{{--                                        {{ dd(Auth::user()->wishlist()->attach(8)) }}--}}
                                     </div>
                                     @if($property->is_featured)
                                     <div class="featured">
@@ -89,7 +91,28 @@
                                     @endif
                                 </div>
                                 <div class="price">${{ $property->price }}</div>
-                                <div class="wishlist"><a href=""><i class="far fa-heart"></i></a></div>
+                                <div class="wishlist">
+                                    @if (Auth::check() && Auth::user()->role == 'user')
+{{--                                        @php--}}
+{{--                                            // Check if the property is in the wishlist--}}
+{{--                                            $inWishlist = $wishlists->contains('property_id', $property->id);--}}
+{{--                                        @endphp--}}
+
+                                        @if($wishlist->contains('property_id', $property->id))
+                                            <a href="#" class="wishlist-toggle in-wishlist" data-property-id="{{ $property->id }}">
+                                                <i class="fas fa-heart"></i>
+                                            </a>
+                                        @else
+                                            <a href="#" class="wishlist-toggle" data-property-id="{{ $property->id }}">
+                                                <i class="far fa-heart"></i>
+                                            </a>
+                                        @endif
+                                    @else
+                                        <a href="#" class="wishlist-toggle" data-property-id="{{ $property->id }}">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    @endif
+                                </div>
                             </div>
                             <div class="text">
                                 <h3><a href="{{ route('theme.properties.show',$property->slug) }}">Sea Side Property</a></h3>
@@ -124,7 +147,7 @@
     </div>
 </div>
 
-<div class="why-choose" style="background-image: url(uploads/why-choose.jpg)">
+<div class="why-choose" style="background-image: url({{ '/storage/settings/'.$siteSettings['why-choose']['image'] }})">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -155,7 +178,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="agent">
     <div class="container">
@@ -190,8 +212,6 @@
     </div>
 </div>
 
-
-
 <div class="location pb_40">
     <div class="container">
         <div class="row">
@@ -224,9 +244,7 @@
     </div>
 </div>
 
-
-
-<div class="testimonial" style="background-image: url(uploads/testimonial-bg.jpg)">
+<div class="testimonial" style="background-image: url({{ '/storage/settings/'.$siteSettings['happy-client']['image'] }})">
     <div class="bg"></div>
     <div class="container">
         <div class="row">
@@ -249,7 +267,6 @@
                             </div>
                             <div class="description">
                                 <p>{{ strip_tags($testimonial->content) }}</p>
-{{--                                <p>{!! $testimonial->content !!}</p>--}}
                             </div>
                         </div>
                         @endforeach
@@ -298,4 +315,61 @@
         </div>
     </div>
 </div>
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(document).on('click', '.wishlist-toggle', function(e) {
+        e.preventDefault();
+
+        let $this = $(this);
+        let propertyId = $this.attr('data-property-id');
+
+        if ($this.hasClass('in-wishlist')) {
+            // Remove from wishlist
+            $.ajax({
+                type: 'DELETE',
+                url: "{{ route('theme.wishlist.destroy') }}", // Adjust to your remove route
+                data: {
+                    'property_id': propertyId
+                },
+                success: function(data) {
+                    if (data.success) {
+                        $this.html('<i class="far fa-heart"></i>');
+                        $this.removeClass('in-wishlist');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    if (xhr.status === 401) {
+                        window.location.href = '/login';
+                    }
+                    console.log(xhr.responseText);
+                }
+            });
+        } else {
+            // Add to wishlist
+            $.ajax({
+                type: 'post',
+                url: "{{ route('theme.wishlist.store') }}",
+                data: {
+                    'property_id': propertyId
+                },
+                success: function(data) {
+                    $this.html('<i class="fas fa-heart"></i>');
+                    $this.addClass('in-wishlist');
+                },
+                error: function(xhr, status, error) {
+                    if (xhr.status === 401) {
+                        window.location.href = '/login';
+                    }
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+    });
+</script>
 @endsection

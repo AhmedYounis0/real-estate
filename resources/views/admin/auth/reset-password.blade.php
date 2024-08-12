@@ -13,12 +13,27 @@
                                 <h4 class="text-center">Reset Password</h4>
                             </div>
                             <div class="card-body card-body-auth">
-                                <form method="POST" action="">
+                                <x-auth-session-status class="mb-4" :status="session('status')" />
+                                <form action="{{ route('dashboard.password.store') }}" method="POST">
+                                    @csrf
                                     <div class="form-group">
-                                        <input type="password" class="form-control" name="" placeholder="Password" value="" autofocus>
+                                        <input type="email" class="form-control" name="email" placeholder="Password" value="{{ $request->email }}" autofocus>
+                                        <input type="hidden" name="token" value="{{ $request->token }}">
+                                        @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" name="" placeholder="Retype Password" value="">
+                                        <input type="password" class="form-control" name="password" placeholder="Password" value="" autofocus>
+                                        @error('password')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="password_confirmation" placeholder="Retype Password" value="">
+                                        @error('password_confirmation')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg w_100_p">

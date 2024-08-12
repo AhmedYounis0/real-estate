@@ -5,10 +5,10 @@
                 <div class="item">
                     <h2 class="heading">Important Links</h2>
                     <ul class="useful-links">
-                        <li><a href="">Home</a></li>
-                        <li><a href="">Properties</a></li>
-                        <li><a href="">Agents</a></li>
-                        <li><a href="">Blog</a></li>
+                        <li><a href="{{ route('theme.index') }}">Home</a></li>
+                        <li><a href="{{ route('theme.properties.index') }}">Properties</a></li>
+                        <li><a href="{{ route('theme.agents.index') }}">Agents</a></li>
+                        <li><a href="{{ route('theme.blogs.index') }}">Blog</a></li>
                     </ul>
                 </div>
             </div>
@@ -16,10 +16,11 @@
                 <div class="item">
                     <h2 class="heading">Locations</h2>
                     <ul class="useful-links">
-                        <li><a href="">New York</a></li>
-                        <li><a href="">Boston</a></li>
-                        <li><a href="">Orlanco</a></li>
-                        <li><a href="">Los Angeles</a></li>
+                        @if($footerLocations->count())
+                            @foreach($footerLocations as $footerLocation)
+                                <li><a href="{{ route('theme.locations.show',$footerLocation) }}">{{ $footerLocation->name }}</a></li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -32,36 +33,36 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="right">
-                            34 Antiger Lane, USA, 12937
+                            {!! $siteSettings['address']['value'] !!}
                         </div>
                     </div>
                     <div class="list-item">
                         <div class="left">
                             <i class="fas fa-phone"></i>
                         </div>
-                        <div class="right">contact@arefindev.com</div>
+                        <div class="right">{!! $siteSettings['email']['value'] !!}</div>
                     </div>
                     <div class="list-item">
                         <div class="left">
                             <i class="fas fa-envelope"></i>
                         </div>
-                        <div class="right">122-222-1212</div>
+                        <div class="right">{!! $siteSettings['phone']['value'] !!}</div>
                     </div>
                     <ul class="social">
                         <li>
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
                         </li>
                         <li>
-                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
                         </li>
                         <li>
-                            <a href=""><i class="fab fa-pinterest-p"></i></a>
+                            <a href="https://www.pinterest.com/"><i class="fab fa-pinterest-p"></i></a>
                         </li>
                         <li>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
                         </li>
                         <li>
-                            <a href=""><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -83,7 +84,7 @@
                             <input type="submit" id="subscribeBtn" class="btn btn-primary" value="Subscribe Now">
                         </div>
                     </form>
-                    <div id="message"></div>
+                    <div id="subscribeMessage"></div>
                 </div>
             </div>
         </div>
@@ -100,9 +101,9 @@
             <div class="col-lg-6 col-md-6">
                 <div class="right">
                     <ul>
-                        <li><a href="terms.html">Terms of Use</a></li>
+                        <li><a href="{{ route('theme.terms') }}">Terms of Use</a></li>
                         <li>
-                            <a href="privacy.html">Privacy Policy</a>
+                            <a href="{{ route('theme.privacy') }}">Privacy Policy</a>
                         </li>
                     </ul>
                 </div>
@@ -139,7 +140,7 @@
                         $.each(response.errors, function(key, value) {
                             errorMessages += '<div class="alert alert-danger">' + value[0] + '</div>';
                         });
-                        $('#message').html(errorMessages);
+                        $('#subscribeMessage').html(errorMessages);
                     } else {
                         console.error(error);
                     }

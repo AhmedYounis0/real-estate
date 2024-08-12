@@ -47,6 +47,11 @@ class Property extends Model
         return $this->belongsTo(Order::class);
     }
 
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

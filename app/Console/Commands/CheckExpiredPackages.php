@@ -40,12 +40,10 @@ class CheckExpiredPackages extends Command
             $order->status = 'expired';
             $order->save();
 
-//            dd($order->properties);
-//            $order->properties->order_id = null;
-
             foreach ($order->properties as $property)
             {
                 $property->order_id = null;
+                $property->is_featured = null;
                 $property->save();
             }
 

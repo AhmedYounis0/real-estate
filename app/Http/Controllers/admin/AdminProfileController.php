@@ -11,9 +11,10 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminProfileController extends Controller
 {
-    public function edit(Request $request)
+    public function edit()
     {
-        return view('admin.auth.profile');
+        $title = 'Profile';
+        return view('admin.auth.profile', compact('title'));
     }
 
     public function update(UpdateAdminRequest $request)

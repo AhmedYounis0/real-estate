@@ -16,7 +16,10 @@ class OrderController extends Controller
     public function __invoke(Request $request)
     {
         $title = 'Orders';
-        $orders = Order::with('package')->where('user_id' , Auth::id())->get();
+        $orders = Order::with('package')
+            ->where('user_id' , Auth::id())
+            ->orderBy('id' ,'desc')
+            ->get();
         return view('theme.agent.orders', compact('title','orders'));
     }
 }

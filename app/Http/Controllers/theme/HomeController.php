@@ -11,6 +11,7 @@ use App\Models\Testimonial;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -19,10 +20,21 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $locations = Location::withCount('properties')
-            ->orderBy('properties_count', 'desc')
-            ->take(8)
-            ->get();
+        $locations = Location::whereHas('properties', function ($query) {
+            $query->whereNotNull('order_id');
+        })
+        ->withCount(['properties' => function ($query) {
+            $query->whereNotNull('order_id');
+        }])
+        ->OrderBy('properties_count', 'desc')
+        ->take(8)
+        ->get();
+
+        $wishlist = [];
+        if (Auth::check() && Auth::user()->role == 'user') {
+            $wishlist = Auth::user()->wishlists()->get();
+        }
+
         $testimonials = Testimonial::all();
         $blogs = Blog::all();
         $chooses = Choose::all();
@@ -43,7 +55,8 @@ class HomeController extends Controller
             'agents',
             'chooses',
             'types',
-            'properties'
+            'properties',
+            'wishlist',
         ));
     }
 }

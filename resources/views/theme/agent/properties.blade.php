@@ -19,7 +19,7 @@
                                 <th>Location</th>
                                 <th>Status</th>
                                 <th>Featured</th>
-                                <th class="w-100">Options</th>
+                                <th class="w-60">Options</th>
                                 <th class="w-60">Action</th>
                             </tr>
                         </thead>
@@ -43,13 +43,18 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('agent.properties.edit',$property) }}" class="btn btn-warning btn-sm text-white"><i class="fas fa-edit"></i></a>
-{{--                                    <a href="" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure?');"><i class="fas fa-trash-alt"></i></a>--}}
                                     <form action="{{ route('agent.properties.destroy', $property) }}" class="d-inline" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" onclick="return confirm('Are you sure?')"
                                                 class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                                     </form>
+                                    @if($property->order_id == null & $order != null)
+                                    <form action="{{ route('agent.property.activate', ['order' => $order->id, 'property' => $property->id]) }}" class="d-inline" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success btn-sm text-white">Activate</button>
+                                    </form>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

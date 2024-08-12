@@ -1,5 +1,6 @@
 @extends('theme.master')
 @section('content')
+@include('theme.partials.internal-banner')
 <div class="blog">
     <div class="container">
         <div class="row">

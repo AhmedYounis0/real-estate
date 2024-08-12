@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\AdminPasswordChangeNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Notifications\ChangeAgentUserPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,9 +16,18 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasApiTokens, HasFactory, Notifiable;
 
 
-    public function SendPasswordResetNotification($token)
+//    public function SendPasswordResetNotification($token)
+//    {
+//        $this->notify(new ChangeAgentUserPasswordNotification($token));
+//    }
+    public function sendPasswordResetNotification($token)
     {
-        $this->notify(new ChangeAgentUserPasswordNotification($token));
+        if ($this->role === 'agent' || $this->role === 'user') {
+            $this->notify(new ChangeAgentUserPasswordNotification($token));
+        } elseif ($this->role === 'admin') {
+            $this->notify(new AdminPasswordChangeNotification($token));
+        }
+        // Additional roles can be handled similarly.
     }
     /**
      * The attributes that are mass assignable.
@@ -55,6 +65,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
     }
 
     public function setNameAttribute($value)

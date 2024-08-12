@@ -1,7 +1,7 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">Admin Panel</a>
+            <a href="{{ route('dashboard.index') }}">Admin Panel</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('dashboard.index') }}"></a>
@@ -16,11 +16,46 @@
                 </a>
             </li>
 
-            <li class="">
-                <a class="nav-link" href="#">
+            <li class="@if($title == 'Settings') active @endif">
+                <a class="nav-link" href="{{ route('dashboard.settings.index') }}">
                     <i class="fas fa-hand-point-right">
                     </i> <span>Website Settings</span>
                 </a>
+            </li>
+
+            <li class="nav-item dropdown @if ($title == 'Locations') active @elseif($title == 'Types') active @elseif($title == 'Amenities') active @endif">
+                <a href="#" class="nav-link has-dropdown">
+                    <i class="fas fa-hand-point-right"></i>
+                    <span>Property Section</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="@if ($title == 'Locations') active @endif">
+                        <a class="nav-link" href="{{ route('dashboard.locations.index') }}">
+                            <i class="fas fa-hand-point-right"></i>
+                            <span>Locations</span>
+                        </a>
+                    </li>
+                    <li class="@if ($title == 'Types') active @endif">
+                        <a class="nav-link" href="{{ route('dashboard.types.index') }}">
+                            <i class="fas fa-hand-point-right"></i>
+                            <span>Types</span>
+                        </a>
+                    </li>
+                    <li class="@if ($title == 'Amenities') active @endif">
+                        <a class="nav-link" href="{{ route('dashboard.amenities.index') }}">
+                            <i class="fas fa-hand-point-right"></i>
+                            <span>Amenities</span>
+                        </a>
+                    </li>
+                    <li class="@if ($title == 'Properties') active @endif">
+                        <a class="nav-link" href="{{ route('dashboard.properties.index') }}">
+                            <i class="fas fa-hand-point-right"></i>
+                            <span>Properties</span>
+                        </a>
+                    </li>
+{{--                    <li class="active"><a class="nav-link" href=""><i class="fas fa-angle-right"></i> Item 1</a></li>--}}
+{{--                    <li class=""><a class="nav-link" href=""><i class="fas fa-angle-right"></i> Item 2</a></li>--}}
+                </ul>
             </li>
 
             <li class="@if ($title == 'Packages') active @endif">
@@ -37,45 +72,24 @@
                 </a>
             </li>
 
-            <li class="">
-                <a class="nav-link" href="#">
+            <li class="@if ($title == 'Messages') active @endif">
+                <a class="nav-link" href="{{ route('dashboard.contacts.index') }}">
                     <i class="fas fa-hand-point-right"></i>
                     <span>Messages</span>
                 </a>
             </li>
 
-            <li class="">
+            <li class="@if ($title == 'Customers') active @endif">
                 <a class="nav-link" href="{{ route('dashboard.customers.index') }}">
                     <i class="fas fa-hand-point-right"></i>
                     <span>Customers</span>
                 </a>
             </li>
 
-            <li class="">
+            <li class="@if ($title == 'Agents') active @endif">
                 <a class="nav-link" href="{{ route('dashboard.agents.index') }}">
                     <i class="fas fa-hand-point-right"></i>
                     <span>Agents</span>
-                </a>
-            </li>
-
-            <li class="@if ($title == 'Types') active @endif">
-                <a class="nav-link" href="{{ route('dashboard.types.index') }}">
-                    <i class="fas fa-hand-point-right"></i>
-                    <span>Types</span>
-                </a>
-            </li>
-
-            <li class="@if ($title == 'Amenities') active @endif">
-                <a class="nav-link" href="{{ route('dashboard.amenities.index') }}">
-                    <i class="fas fa-hand-point-right"></i>
-                    <span>Amenities</span>
-                </a>
-            </li>
-
-            <li class="@if ($title == 'Locations') active @endif">
-                <a class="nav-link" href="{{ route('dashboard.locations.index') }}">
-                    <i class="fas fa-hand-point-right"></i>
-                    <span>Locations</span>
                 </a>
             </li>
 

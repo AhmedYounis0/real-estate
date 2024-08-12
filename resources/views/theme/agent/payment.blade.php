@@ -41,16 +41,19 @@
                         </tr>
                         <tr>
                             <td>
-                                <select name="" class="form-control">
-                                    @foreach($packages as $package)
-                                        @if($package->name != 'Free')
-                                            <option value="{{ $package['id'] }}">{{ $package['name'] }} (${{ $package['price'] }})</option>
-                                        @endif
-                                    @endforeach
-                                </select>
+                                <form action="{{ route('agent.stripe') }}" method="post">
+                                    @csrf
+                                    <select name="package_id" class="form-control">
+                                        @foreach($packages as $package)
+                                            @if($package->name != 'Free')
+                                                <option value="{{ $package['id'] }}">{{ $package['name'] }} (${{ $package['price'] }})</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                             </td>
                             <td>
-                                <a href="" class="btn btn-secondary btn-sm buy-button">Pay with Card</a>
+                                <button class="btn btn-secondary btn-sm buy-button" type="submit">Pay with card</button>
+                                </form>
                             </td>
                         </tr>
                     </table>

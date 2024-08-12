@@ -27,9 +27,9 @@
                                     @if ($faqs->count())
                                         @foreach ($faqs as $faq)
                                         <tr>
-                                            <td><?= $faq['id'] ?></td>
-                                            <td><?= $faq['question'] ?></td>
-                                            <td><?= substr($faq['answer'],0,50) ?></td>
+                                            <td>{{ $faq['id'] }}</td>
+                                            <td>{{ $faq['question'] }}</td>
+                                            <td>{{ Str::limit($faq['answer'],0,50)  }}</td>
                                             <td class="pt_10 pb_10">
                                                 <a href="{{ route('dashboard.faqs.edit',$faq) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                                 <form action="{{ route('dashboard.faqs.destroy', $faq) }}" class="d-inline" method="POST">

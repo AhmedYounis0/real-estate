@@ -19,7 +19,8 @@ class NewPasswordController extends Controller
      */
     public function create(Request $request): View
     {
-        return view('theme.auth.reset-password', ['request' => $request]);
+        $title = 'Reset Password';
+        return view('theme.auth.reset-password', compact('title'),['request' => $request]);
     }
 
     /**

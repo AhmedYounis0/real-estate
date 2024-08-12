@@ -15,7 +15,6 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Transaction Id</th>
                                             <th>Package Name</th>
                                             <th>Price</th>
                                             <th>Purchase Date</th>
@@ -29,9 +28,8 @@
                                         @forelse ($orders as $order)
                                             <tr>
                                                 <td>{{ 1 + $loop->index }}</td>
-                                                <td>{{ $order->transaction_id }}</td>
                                                 <td>{{ $order->package->name}}</td>
-                                                <td>{{ $order->amount}}</td>
+                                                <td>{{ $order->package->price}}</td>
                                                 <td>{{ $order->purchase_date}}</td>
                                                 <td>{{ $order->expire_date}}</td>
                                                 <td>{{ $order->payment_method}}</td>

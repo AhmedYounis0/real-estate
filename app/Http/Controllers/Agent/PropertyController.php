@@ -31,7 +31,10 @@ class PropertyController extends Controller
     {
         $title = 'All Properties';
         $properties = Property::with('location','type','amenities')->where('user_id',Auth::user()->id)->get();
-        return view('theme.agent.properties', compact('title','properties'));
+        $order = Order::where('status','active')
+            ->where('credit','>',0)
+            ->first();
+        return view('theme.agent.properties', compact('title','properties','order'));
     }
 
     /**
@@ -64,8 +67,6 @@ class PropertyController extends Controller
             ->whereNotNull('order_id')
             ->where('is_featured',1)
             ->count();
-
-//        dd($featuredProperties);
 
         return view('theme.agent.property-add', compact(
             'title',
@@ -163,6 +164,16 @@ class PropertyController extends Controller
         abort(403);
     }
 
+    public function activate(Request $request)
+    {
+        $property = Property::find($request->property);
+        $property->order_id = $request->order;
+        $property->save();
+        $order = Order::find($request->order);
+        $order->decrement('credit');
+        return redirect()->back();
+    }
+
     /**
      * Update the specified resource in storage.
      */
@@ -207,9 +218,12 @@ class PropertyController extends Controller
 
             $property->delete();
 
-            $order = Order::where('user_id',$user->id)->where('id',$property->order_id)->first();
+            if($property->load('order')->order != null)
+            {
+                $order = Order::where('user_id',$user->id)->where('id',$property->order_id)->first();
 
-            $order->increment('credit');
+                $order->increment('credit');
+            }
 
             return redirect()->back();
         }

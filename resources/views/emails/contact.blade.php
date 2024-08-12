@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Name is : {{ $data['name'] }}</h1>
-    <h1>Email is : {{ $data['email'] }}</h1>
+    <h2>Email is : {{ $data['email'] }}</h2>
     <p>Message content is : {{ $data['message'] }}</p>
 </body>
 </html>
